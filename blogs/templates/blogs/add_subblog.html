@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static "blogs/css/index.css" %}" />
+
+<title>
+    {% if request.user.is_authenticated %}
+        BlogIt | {{request.user.username}}
+    {% else %}
+        BlogIt | Not Registered
+    {% endif %}
+</title>
+
+{% endblock title %}
+
+
+{% block content %}
+
+
+<form action = "" method = "post">
+    {% csrf_token %}
+    {{ subblog_form.as_p }}
+    <button type="submit">Update</button>
+</form>
+
+
+{% endblock content %}

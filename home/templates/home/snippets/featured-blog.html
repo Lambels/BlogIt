@@ -1,0 +1,91 @@
+<div class="container col-md-12">
+    <br>
+    <div class="row mt-auto">
+        <div class="col-md-12">
+            <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <div class="card-header">Featured</div>
+                <div class="card-body mt-2 mb-2">
+                    {% if blog.author == request.user %}
+                        <div class="fade-button">
+                            <a href="#" class="card-title" style="position: absolute; top: 10px; right: 10px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    {% endif %}
+                    {% if request.user.username in blog.users_who_liked %}
+                        <a href="{% url 'blog_view' pk=blog.id %}">
+                            <h1 class="card-title">{{blog.title}}</h1>
+                        </a>
+                        <h4 class="card-text">{{blog.snip|safe|truncatechars:250}}</h4>
+                        <div class="card-text" style="position: absolute; bottom: 15px; right: 10px;">
+                            <a id="{{id}}" onclick="like_or_dislike_blog('{{id}}', '{{blog.pk}}', '{{user_token}}')">
+                                <svg style="color: blue;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'blog_view' pk=blog.id %}">
+                            <h1 class="card-title">{{blog.title}}</h1>
+                        </a>
+                        <p class="card-text">{{blog.snip|safe|truncatechars:250}}</p>
+                        <div class="card-text" style="position: absolute; bottom: 15px; right: 10px;">
+                            <a id="{{id}}" onclick="like_or_dislike_blog('{{id}}', '{{blog.pk}}', '{{user_token}}')">
+                                <svg style="color: black;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="card-footer text-muted">
+                    Created on {{blog.added}} by {{blog.author.username}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function like_or_dislike_blog(id, blog_id, user_token) {
+        const like_button = document.getElementById(id);
+        const icon = like_button.childNodes[1];
+        const color = icon.style.color;
+        if (color == "blue") {
+            icon.style.color = "black";
+            $.ajax({
+                    url: '/api/blogs/like_dislike_blog',
+                    type: "POST",
+                    dataType: "json",
+                    headers: {
+                        'Authorization': `Token ${user_token}`
+                    },
+                    data: {
+                        blog_id: blog_id,
+                        like_value: -1,
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    },
+                });
+        } else {
+            icon.style.color = "blue";
+            $.ajax({
+                    url: '/api/blogs/like_dislike_blog',
+                    type: "POST",
+                    dataType: "json",
+                    headers: {
+                        'Authorization': `Token ${user_token}`
+                    },
+                    data: {
+                        blog_id: blog_id,
+                        like_value: 1,
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    },
+                });
+        }
+    }
+</script>

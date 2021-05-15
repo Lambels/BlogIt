@@ -1,0 +1,89 @@
+html, body {
+    height: 100%;
+}
+
+#container {
+    min-height: 100%;
+}
+
+#main {
+    overflow: auto;
+    padding-bottom: 100px;
+}
+
+.icon-bar {
+    width: 100%;
+    background-color: #e4e4e4;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: hidden;
+}
+
+
+.icon-bar a {
+    float: right;
+    align-items: center;
+    width: 70px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    color: black;
+}
+
+
+.icon-bar a:hover {
+    color: rgb(130, 149, 255);
+}
+
+.icon-bar .logo {
+    float: left;
+    color: black;
+    transition: all 0.3s ease;
+    width: 35px;
+    padding: 18px;
+    font-size: 20px;
+    align-items: center;
+}
+
+
+.icon-bar h4 {
+    float: left;
+    padding: 22px;
+    text-align: center;
+}
+
+
+.icon-bar .active {
+    color: white;
+}
+
+
+.fade-button a{
+    transition: all 0.3s ease;
+    color: black;
+}
+
+
+.fade-button a:hover{
+    color: rgb(130, 149, 255);
+}
+
+
+.alert-fixed {
+    position:fixed; 
+    top: 0px; 
+    left: 0px; 
+    width: 100%;
+    z-index:9999; 
+    border-radius:0px
+}
+
+.glow-button:hover {
+    color: rgb(255, 255, 255);
+    box-shadow: 0 5px 15px rgba(175, 115, 224, 0.4);
+  }
+
+
+.glow-header:hover {
+    color: rgb(130, 149, 255);
+    box-shadow: 0 5px 15px rgba(75, 100, 212, 0.4);
+  }

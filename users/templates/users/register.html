@@ -1,0 +1,72 @@
+{% extends "base_no_footer.html" %}
+
+{% load static %}
+{% block title %}
+<title>
+    Signup | BlogIt
+</title>
+<link rel="stylesheet" type="text/css" href="{% static "home/css/index.css" %}" />
+{% endblock title %}
+
+
+{% block content %}
+<div class="area" >
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div >
+<div class="context">
+    <div class="col d-flex justify-content-center">
+        <div class="card mb-3"style="width:1000px; box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+            <div class="col-md-8">
+                <div class="card-body">
+                <h1 class="card-title">Sign Up</h1>
+                <hr>
+                <p class="card-text">
+                    <form method="POST" class="form-signin">{% csrf_token %}
+                        <p>Email</p>
+                        <input class="form-control" name="email" type="email" maxlength="60" placeholder="example@email.com" required="true">
+                        <br>
+                        <p>Username</p>
+                        <input class="form-control" name="username" maxlength="10" placeholder="VeryCoolUsername" required="true">
+                        <br>
+                        <p>Password</p>
+                        <input class="form-control" name="password1" type="password" required="true">
+                        <br>
+                        <p>Confirm Password</p>
+                        <input class="form-control" name="password2" type="password" required="true">
+                        <br>
+                        <button class="btn btn-lg btn-primary glow-button btn-block" type="submit" style="width: 100px;">Sign Up</button>
+                        {% if register_form.errors %}
+                            <h1>ddsfsafghg</h1>
+                            <div class="fixed-top">
+                                <div class="alert alert-danger alert-dismissible fade show">
+                                    <strong>Error!</strong> Invalid Email or Password. <a href="{% url 'password_reset' %}" class="alert-link">Forgot password?</a>
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </form>
+                </p>
+                <p class="card-text align-text-bottom">
+                    <small class="text-muted mt-auto">Or <a href="{% url 'login' %}">Login</a></small>
+                </p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

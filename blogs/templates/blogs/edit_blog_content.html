@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static "home/css/index.css" %}" />
+<title>
+    {% if request.user.is_authenticated %}
+        BlogIt | {{request.user.username}}
+    {% else %}
+        BlogIt | Not Registered
+    {% endif %}
+</title>
+
+{% endblock title %}
+
+
+{% block content %}
+
+
+<div class="icon-bar glow-header">
+    <a href="{% url 'user' name=request.user.username %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+        </svg>
+    </a>
+    <a href="{% url 'home' %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+            <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+        </svg>
+    </a>
+    <a href="{% url 'create_blog' %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+        </svg>
+    </a>
+    <a href="{% url 'notifications' %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+        </svg>
+    </a>
+    <a class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
+            <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z"/>
+            <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"/>
+        </svg>
+    </a>
+    <h4 style="font-family:verdana; color:#000000">
+        BlogIt
+    </h4>
+</div>
+<br>
+<br>
+<div class="col d-flex justify-content-center">
+    <div class="card text-center" style="width: 50%; box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+        <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+            <a class="nav-link" aria-current="true" href="{% url 'edit_blog' pk=blog.id %}?page=appearance">Appearance</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link active" href="{% url 'edit_blog' pk=blog.id %}?page=content">Content</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'edit_blog' pk=blog.id %}?page=important">Important</a>
+            </li>
+        </ul>
+        </div>
+        <div class="col-md-7" style="align-items: flex-start;">
+            <div class="card-body">
+            <h3 class="card-title">Edit your blogs content</h3>
+            <hr>
+            <br>
+            <p class="card-text">
+                <form method="POST">{% csrf_token %}
+                    <h6>Add Sub blog</h6>
+                    <br>
+                    <label>Title</label>
+                    <input class="form-control"  name="title" maxlength="15" required="true">
+                    <br>
+                    <label>Content</label>
+                    <input class="form-control" name="content" max_length='20' required="true">
+                    <br>
+                    <button class="btn btn-lg btn-primary glow-button btn-block" type="submit">Add</button>
+                </form>
+            </p>
+            <p class="card-text">
+                <h6>Delete Subblog</h6>
+                <br>
+                <select class="form-control" id="selected_subblog">
+                    {% for subblog in subblogs %}
+                        <option>{{subblog.title}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <button class="btn btn-lg btn-danger glow-button btn-block" onclick="deleteSubblog('{{user_token}}', '{{blog.id}}')">Delete Subblog</button>                 
+            </p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function deleteSubblog(user_token, blog_id) {
+        var select = document.getElementById("selected_subblog");
+        var selected_subblog = select.value;
+        $.ajax({
+                url: "/api/blogs/delete_subblog",
+                type: "POST",
+                dataType: "json",
+                headers: {
+                    'Authorization': `Token ${user_token}`,
+                },
+                data: {
+                    subblog_title: selected_subblog,
+                    parent_blog_id: blog_id
+                },
+                success: function () {
+                    window.location.replace("http://127.0.0.1:8000/");
+                }
+            });
+    }
+</script>
+{% endblock content %}

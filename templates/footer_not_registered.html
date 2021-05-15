@@ -1,0 +1,48 @@
+<style>
+  #footer {
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    width:100%;
+    display:none;
+  }
+</style>
+
+
+<div style="padding-top: 200px;">
+  <footer class="bg-light text-center text-lg-start" id="footer" style="background-color: #e6e6e6;">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: CTA -->
+      <section class="">
+        <p class="d-flex justify-content-center align-items-center">
+          <span class="me-3">Register for free &nbsp; </span>
+          <button href="{% url 'register' %}" style="box-shadow:1px 1px 12px 6px rgba(0, 0, 0, 0.2)" class="btn btn-primary">
+            Sign up!
+          </button>
+        </p>
+      </section>
+      <!-- Section: CTA -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright:
+      <a style="color:black;" href="https://mdbootstrap.com/">BlogIt</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(window).scroll(function() {
+   if($(window).scrollTop() + $(window).height() == $(document).height()) {
+      $("#footer").fadeIn("slow");
+   }
+   else {
+      $("#footer").fadeOut("slow");
+   }
+});
+</script>
